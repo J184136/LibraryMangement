@@ -1,0 +1,77 @@
+library_system table ------------------------------------------------------------------------------------------------------------------
+
+CREATE TABLE `library_system` (
+  `firstname` varchar(45) DEFAULT NULL,
+  `lastname` varchar(45) DEFAULT NULL,
+  `coursename` varchar(45) DEFAULT NULL,
+  `userId` int(11) NOT NULL AUTO_INCREMENT,
+  `password` varchar(45) NOT NULL,
+  PRIMARY KEY (`userId`)
+) ENGINE=InnoDB AUTO_INCREMENT=184104 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO `library_system`.`library_system`
+(`firstname`,
+`lastname`,
+`userId`,
+`password`)
+VALUES
+("Admin","Account",101,"admin123");
+INSERT INTO `library_system`.`library_system`
+(`firstname`,
+`lastname`,
+`userId`,
+`password`)
+VALUES
+("Admin","Account",102,"admin123");
+INSERT INTO `library_system`.`library_system`
+(`firstname`,
+`lastname`,
+`userId`,
+`password`)
+VALUES
+("Admin","Account",103,"admin123");
+INSERT INTO `library_system`.`library_system`
+(`firstname`,
+`lastname`,
+`userId`,
+`password`)
+VALUES
+("Admin","Account",104,"admin123");
+INSERT INTO `library_system`.`library_system`
+(`firstname`,
+`lastname`,
+`userId`,
+`password`)
+VALUES
+("Admin","Account",105,"admin123");
+
+ALTER TABLE `library_system`.`library_system` 
+CHANGE COLUMN `userId` `userId` INT(11) NOT NULL AUTO_INCREMENT ;
+
+
+ALTER TABLE library_system.library_system AUTO_INCREMENT=184100;
+
+books table ---------------------------------------------------------------------------------------------------------------------------
+CREATE TABLE `books` (
+  `bookname` varchar(145) NOT NULL,
+  `author` varchar(145) NOT NULL,
+  `description` varchar(145) NOT NULL,
+  `noOfBooks` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+issue_books table-------------------------------------------------------------------------------------------------------------------
+CREATE TABLE `issue_books` (
+  `userId` int(11) DEFAULT NULL,
+  `bookname` varchar(145) DEFAULT NULL,
+  `author` varchar(45) DEFAULT NULL,
+  `issue_date` date DEFAULT NULL,
+  `return_date` date DEFAULT NULL,
+  `price` int(11) DEFAULT NULL,
+  `status` varchar(45) DEFAULT NULL,
+  `action` varchar(45) DEFAULT 'NoRequest'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+ALTER TABLE `library_system`.`issue_books` 
+CHANGE COLUMN `action` `action` VARCHAR(45) NULL DEFAULT 'NoRequest' 
