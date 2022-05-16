@@ -218,19 +218,18 @@ public class LibraryDAO {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		con = DriverManager.getConnection(url, userName, password);
 		Statement stmt = con.createStatement();
-		ResultSet result = stmt.executeQuery("SELECT return_date,price,status,userId,bookname,author FROM issue_books");
+		ResultSet result = stmt.executeQuery("SELECT return_date,price,userId,bookname,author FROM issue_books");
 		while(result.next()) {
 			Date ReturnDate=result.getDate(1);
 			int Price=result.getInt(2);
-			String Status=result.getString(3);
-			int UserId=result.getInt(4);
-			String Bookname=result.getString(5);
-			String Author=result.getString(6);
+			int UserId=result.getInt(3);
+			String Bookname=result.getString(4);
+			String Author=result.getString(5);
 			LocalDate todayDate =  LocalDate.now();
 			LocalDate date=ReturnDate.toLocalDate();
 		    int check = (int) date.until(todayDate, ChronoUnit.DAYS);
 			//System.out.println(check);
-			if(check>0 && Status.equals("Issued")) {
+			if(check>0) {
 				Price=check;
 				PreparedStatement ps = con.prepareStatement("update issue_books  set price=? where userId=? and bookname=? and return_date=? and author=?");
 				ps.setInt(1, Price);
@@ -355,16 +354,18 @@ public class LibraryDAO {
 		java.sql.Date date1 = java.sql.Date.valueOf(returnDate);
 		String Action="NoRequest";
 		String Status="Renewed";
+		int Price=0;
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		con = DriverManager.getConnection(url, userName, password);
-		PreparedStatement ps = con.prepareStatement("update issue_books  set issue_date=?,return_date=?,action=?,status=? where userId=? and bookname=?  and author=?");
+		PreparedStatement ps = con.prepareStatement("update issue_books  set issue_date=?,return_date=?,action=?,status=?,price=? where userId=? and bookname=?  and author=?");
 		ps.setDate(1, date);
 		ps.setDate(2, date1);
 		ps.setString(3, Action);
 		ps.setString(4, Status);
-		ps.setInt(5, studentId);
-		ps.setString(6, Bookname);
-		ps.setString(7, Author);
+		ps.setInt(5, Price);
+		ps.setInt(6, studentId);
+		ps.setString(7, Bookname);
+		ps.setString(8, Author);
 		ps.executeUpdate();
 	}
 
@@ -387,6 +388,3 @@ public class LibraryDAO {
 	
 	
 }
-
-
-
