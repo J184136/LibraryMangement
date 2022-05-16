@@ -484,9 +484,6 @@ public class LibrarySystem {
 		model.addAttribute("list", list);
 		}
 		return "books";
-	}
-	
-	
-	
+	}	
 	
 }
