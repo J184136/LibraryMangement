@@ -52,13 +52,15 @@ font-size: 70px;
     <script>
         function SearchFuntion(){
 	   let filter = document.getElementById('myInput').value;
+	   let filter2 = document.getElementById('myInput').value.toUpperCase();
 	   let tableContain = document.getElementById('tableBody');
        let trContain = tableContain.getElementsByTagName('tr');
 	   for(var i=0;i<trContain.length;i++){
         let tdContain=trContain[i].getElementsByTagName('td');
         for(var j=0;j<tdContain.length;j++){
 			let val=trContain[i].querySelector(".studentId").value;
-		   if(val.indexOf(filter) > -1){
+			let val2=trContain[i].querySelector(".bookName").value.toUpperCase();
+			if((val.indexOf(filter) > -1) || (val2.indexOf(filter2) > -1)){
 			trContain[i].style.display='';
 		   }
 		   else{
@@ -119,7 +121,7 @@ font-size: 70px;
 						<div class="col">
 							<input
 								class="form-control form-control-lg form-control-borderless"
-								type="search" id="myInput" onkeyup="SearchFuntion()" placeholder="Search Student Id here..."?>
+								type="search" id="myInput" onkeyup="SearchFuntion()" placeholder="Search Student Id or BookName here..."?>
 						</div>
 						<div class="col-auto">
 							<button class="btn btn-lg btn-dark" onclick="SearchFuntion()" type="button">
@@ -150,7 +152,7 @@ font-size: 70px;
 					<form action="actionBook">
 						<tr>
 						    <td><input type="hidden" class="studentId" name="studentId" value="${item.studentid}">${item.studentid}</td>
-							<td><input type="hidden" name="bookName" value="${item.bookname}">${item.bookname}</td>
+							<td><input type="hidden" class="bookName" name="bookName" value="${item.bookname}">${item.bookname}</td>
 							<td><input type="hidden" name="author" value="${item.author}">${item.author}</td>
 							<td>${item.price}</td>
 							<td>${item.status}</td>
@@ -164,7 +166,7 @@ font-size: 70px;
 	</div>
 	<br> <br> <br>
 	<footer class="mt-auto py-3">
-		<p class="text-center text-muted">© 2022 Library Management System</p>
+		<p class="text-center text-muted">Â© 2022 Library Management System</p>
 	  </footer>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   </body>
