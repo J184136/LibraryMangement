@@ -50,14 +50,14 @@ h2{
      function SearchFuntion() {
   	   let filter = document.getElementById('myInput').value.toUpperCase();
   	   let rowContain = document.getElementById('cardbody');
-  	   let cardContain = rowContain.getElementsByClassName('card');
-  	   for(var i=0;i<cardContain.length;i++){
-  		   let val=cardContain[i].querySelector(".card-title");
+  	   let colContain = rowContain.getElementsByClassName('colbody');
+  	   for(var i=0;i<colContain.length;i++){
+  		   let val=colContain[i].querySelector(".card-title");
   		   if(val.innerText.toUpperCase().indexOf(filter) > -1){
-  			cardContain[i].style.display='';
+  			colContain[i].style.display='';
   		   }
   		   else{
-  			cardContain[i].style.display='none';
+  			colContain[i].style.display='none';
   		   }
   	   }
      }
@@ -178,7 +178,7 @@ h2{
   
 		<div class="row" id="cardbody">
 			<c:forEach items="${list}" var="item">
-				<div class="col col-4">
+				<div class="col col-4 colbody">
 					<div class="card text-white bg-dark m-3 ">
 						<div class="card-body">
 						<form action="issueBook1">
@@ -200,7 +200,7 @@ h2{
 	</div>
 	<br> <br> <br>
 	<footer class="mt-auto py-3">
-		<p class="text-center text-muted">© 2022 Library Management System</p>
+		<p class="text-center text-muted">Â© 2022 Library Management System</p>
 	  </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   </body>
