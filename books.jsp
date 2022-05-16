@@ -105,7 +105,7 @@ h2{
  <div class="container h-100 my-5 py-5">
 		<h1>Library</h1>
 		<hr>
-		<form action="addbook" method="post">
+		<form action="addbook" method="post" autocomplete="on">
 			<div class="row mb-3">
 				<label for="bookName" class="col-sm-2 col-form-label">Book
 					Name</label>
@@ -193,7 +193,7 @@ h2{
 	</div>
 	<br> <br> <br>
 	<footer class="mt-auto py-3">
-		<p class="text-center text-muted">© 2022 Library Management System</p>
+		<p class="text-center text-muted">Â© 2022 Library Management System</p>
 	  </footer>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   </body>
