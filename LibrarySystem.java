@@ -440,11 +440,6 @@ public class LibrarySystem {
 		return "login";
 	}
 	
-	
-	
-	
-	
-	
 	@RequestMapping("/addbook")
 	public String AddBooks(HttpServletRequest req,Model model) throws ClassNotFoundException, SQLException  {
 		
