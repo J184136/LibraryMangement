@@ -68,14 +68,14 @@ h1{
       function SearchFuntion() {
    	   let filter = document.getElementById('myInput').value.toUpperCase();
    	   let rowContain = document.getElementById('cardbody');
-   	   let cardContain = rowContain.getElementsByClassName('card');
-   	   for(var i=0;i<cardContain.length;i++){
-   		   let val=cardContain[i].querySelector(".card-title");
+   	   let colContain = rowContain.getElementsByClassName('colbody');
+   	   for(var i=0;i<colContain.length;i++){
+   		   let val=colContain[i].querySelector(".card-title");
    		   if(val.innerText.toUpperCase().indexOf(filter) > -1){
-   			cardContain[i].style.display='';
+   			colContain[i].style.display='';
    		   }
    		   else{
-   			cardContain[i].style.display='none';
+   			colContain[i].style.display='none';
    		   }
    	   }
       }
@@ -121,7 +121,7 @@ h1{
         <button type="button" class="btn-close btn-close-white " data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="index2" method="post">
+        <form action="index2" method="post" autocomplete="on">
           <div class="mb-3">
             <label for="StudentLogin" class="form-label">User Id</label>
             <input type="text" name="userid" class="form-control" id="StudentLogin" aria-describedby="StudentLoginHelp" required>
@@ -160,7 +160,7 @@ h1{
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form  action="index" method="post">        
+          <form  action="index" method="post" autocomplete="on">        
             <div class="mb-3">
               <label for="FirstName" class="form-label">First Name</label>
               <input type="text"  name="firstname" class="form-control" id="FirstName" aria-describedby="FirstNameHelp" required>
@@ -207,7 +207,7 @@ h1{
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form  action="index3" method="post">
+        <form  action="index3" method="post"  autocomplete="on">
           <h5 class="text-danger"  id ="visi1" style="visibility: hidden">New Password and Confirm Password should be same</h5>
           <div class="mb-3">
               <label for="StudentId" class="form-label">Student Id</label>
@@ -283,7 +283,7 @@ h1{
 
 		<div class="row" id="cardbody">
 			<c:forEach items="${list}" var="item">
-				<div class="col col-4">
+				<div class="col col-4 colbody">
 					<div class="card text-white bg-dark m-3 ">
 						<div class="card-body">
 							<h2 class="card-title">${item.bookname}</h2>
@@ -301,7 +301,7 @@ h1{
 	</div>
 	<br> <br> <br>
 	<footer class="mt-auto py-3">
-		<p class="text-center text-muted">© 2022 Library Management System</p>
+		<p class="text-center text-muted">Â© 2022 Library Management System</p>
 	  </footer>
 	
     
