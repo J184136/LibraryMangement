@@ -184,12 +184,44 @@ public class LibrarySystem {
 	public String forgetPassword(HttpServletRequest req,Model model) throws ClassNotFoundException, SQLException {
 		int Studentid = Integer.parseInt(req.getParameter("studentidf"));
 		String Password = req.getParameter("passwordf");
-		obj1.forgetPassword(Studentid, Password);
+		int check=obj1.forgetPassword(Studentid, Password);
+		System.out.println(check);
+		if(check>0) {
 		model.addAttribute("CallModel", "clickButton");
 		ResultSet result2=obj1.GetStudentId();
 		while(result2.next()) {
 		int num=Integer.parseInt(result2.getString(1));
 		model.addAttribute("StudentId", (num+1));
+		}
+		ResultSet result=obj1.DisplayBooks();
+		List<LibraryDTO> list=new ArrayList<LibraryDTO>();
+		while(result.next()) {
+		LibraryDTO obj2 =new LibraryDTO();
+		obj2.setBookname(result.getString(1));
+		obj2.setAuthor(result.getString(2));
+		obj2.setDescription(result.getString(3));
+		list.add(obj2);
+		model.addAttribute("list", list);
+		}
+		}
+		else {
+	    model.addAttribute("CallModel2", "clickButton");
+		model.addAttribute("Display3", "You don't have any Account!! Create a Account");
+		ResultSet result2=obj1.GetStudentId();
+		while(result2.next()) {
+		int num=Integer.parseInt(result2.getString(1));
+		model.addAttribute("StudentId", (num+1));
+		}
+		ResultSet result=obj1.DisplayBooks();
+		List<LibraryDTO> list=new ArrayList<LibraryDTO>();
+		while(result.next()) {
+		LibraryDTO obj2 =new LibraryDTO();
+		obj2.setBookname(result.getString(1));
+		obj2.setAuthor(result.getString(2));
+		obj2.setDescription(result.getString(3));
+		list.add(obj2);
+		model.addAttribute("list", list);
+		}
 		}
 		return "index";
 	}
@@ -439,6 +471,11 @@ public class LibrarySystem {
 		}
 		return "login";
 	}
+	
+	
+	
+	
+	
 	
 	@RequestMapping("/addbook")
 	public String AddBooks(HttpServletRequest req,Model model) throws ClassNotFoundException, SQLException  {
