@@ -21,7 +21,7 @@ h1{
 h2{
   color: white;
 }
-h3{
+#Stu{
 font-size: 70px;
 }
  a{
@@ -55,6 +55,7 @@ font-size: 70px;
 	   let filter2 = document.getElementById('myInput').value.toUpperCase();
 	   let tableContain = document.getElementById('tableBody');
        let trContain = tableContain.getElementsByTagName('tr');
+       let count=0;
 	   for(var i=0;i<trContain.length;i++){
         let tdContain=trContain[i].getElementsByTagName('td');
         for(var j=0;j<tdContain.length;j++){
@@ -62,12 +63,21 @@ font-size: 70px;
 			let val2=trContain[i].querySelector(".bookName").value.toUpperCase();
 			if((val.indexOf(filter) > -1) || (val2.indexOf(filter2) > -1)){
 			trContain[i].style.display='';
+			count=count+1;
 		   }
 		   else{
 			trContain[i].style.display='none';
 		   }
         }
 	   }
+	   if(count==0){
+			document.getElementById("SearchFind").style.visibility = "visible"
+			document.getElementById("Studentdetials").style.visibility = "hidden"
+		   }
+		   else{
+			document.getElementById("SearchFind").style.visibility = "hidden"
+			document.getElementById("Studentdetials").style.visibility = "visible"
+		   }
    }
     </script>
     
@@ -121,7 +131,7 @@ font-size: 70px;
 						<div class="col">
 							<input
 								class="form-control form-control-lg form-control-borderless"
-								type="search" id="myInput" onkeyup="SearchFuntion()" placeholder="Search Student Id or BookName here..."?>
+								type="search" id="myInput" onkeyup="SearchFuntion()" onsearch="SearchFuntion()" placeholder="Search Student Id or BookName here..."?>
 						</div>
 						<div class="col-auto">
 							<button class="btn btn-lg btn-dark" onclick="SearchFuntion()" type="button">
@@ -132,8 +142,11 @@ font-size: 70px;
 				</form>
 			</div>
 		</div>
-		<div>
-			<h3 >Student Details</h3>
+		<div id="SearchFind" style="visibility: hidden" class="text-center my-2 py-2">
+			<h3>No Records Found</h3>
+		</div>
+		<div  id="Studentdetials">
+			<h3 id="Stu" >Student Details</h3>
 			<hr>
 			<table class="table table-striped text-center">
 				<thead>
