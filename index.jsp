@@ -69,15 +69,23 @@ h1{
    	   let filter = document.getElementById('myInput').value.toUpperCase();
    	   let rowContain = document.getElementById('cardbody');
    	   let colContain = rowContain.getElementsByClassName('colbody');
+   	   let count=0;
    	   for(var i=0;i<colContain.length;i++){
    		   let val=colContain[i].querySelector(".card-title");
    		   if(val.innerText.toUpperCase().indexOf(filter) > -1){
    			colContain[i].style.display='';
+   			count=count+1;
    		   }
    		   else{
    			colContain[i].style.display='none';
    		   }
    	   }
+   	if(count==0){
+		document.getElementById("SearchFind").style.visibility = "visible"
+	   }
+	   else{
+		document.getElementById("SearchFind").style.visibility = "hidden"
+	   }
       }
          
       window.onload = function(){
@@ -138,7 +146,7 @@ h1{
           <button type="submit" class="btn btn-primary px-5">Log in</button>
         </div>
         <div class="col-6 col-md-4 pt-3">
-          <a href="#" type="button"  data-bs-target="#pwdModal" data-bs-toggle="modal">ForgotPassword</a>
+          <a href="#" type="button"  id="${CallModel2}"  data-bs-target="#pwdModal" data-bs-toggle="modal">ForgotPassword</a>
         </div>
         </div>
         </form>
@@ -208,7 +216,8 @@ h1{
       </div>
       <div class="modal-body">
         <form  action="index3" method="post"  autocomplete="on">
-          <h5 class="text-danger"  id ="visi1" style="visibility: hidden">New Password and Confirm Password should be same</h5>
+          <h5 class="text-danger">${Display3}</h5>
+          <br>
           <div class="mb-3">
               <label for="StudentId" class="form-label">Student Id</label>
               <input type="text" name="studentidf" class="form-control" id="StudentIdF" aria-describedby="StudentIdHelp" required>
@@ -220,6 +229,9 @@ h1{
           <div class="mb-3">
             <label for="CPasswordf" class="form-label">Confirm Password</label>
             <input type="password" id="cpasswordf" name="cpasswordf" class="form-control" id="CPasswordf" required>
+            <br>
+            <h5 class="text-danger"  id ="visi1" style="visibility: hidden">Password and Confirm Password should be same</h5>
+            <br>
           </div>
           <button type="submit"  onclick="return Validate1()" class="btn btn-primary">Reset Password</button>
         </form>
@@ -269,7 +281,7 @@ h1{
                             <i class="fas fa-search h4 text-body"> </i>  
                         </div>  
                              <div class="col">  
-                            <input class="form-control form-control-lg form-control-borderless" id="myInput" type="search" onkeyup="SearchFuntion()" placeholder="Search topics or book name  here..."?>  
+                            <input class="form-control form-control-lg form-control-borderless" id="myInput" type="search" onkeyup="SearchFuntion()" onsearch="SearchFuntion()" placeholder="Search topics or book name  here..."?>  
                         </div>  
                                    <div class="col-auto">  
                             <button class="btn btn-lg btn-dark " onclick="return SearchFuntion()" type="button"> Search </button>  
@@ -296,6 +308,9 @@ h1{
 					</div>
 				</div>
 			</c:forEach>
+			<div id="SearchFind" style="visibility: hidden" class="text-center mb-3 pb-3">
+					<h3>No Records Found</h3>
+				</div>
 		</div>
 	</div>
 	</div>
