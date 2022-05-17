@@ -51,15 +51,23 @@ h2{
   	   let filter = document.getElementById('myInput').value.toUpperCase();
   	   let rowContain = document.getElementById('cardbody');
   	   let colContain = rowContain.getElementsByClassName('colbody');
+  	   let count=0;
   	   for(var i=0;i<colContain.length;i++){
   		   let val=colContain[i].querySelector(".card-title");
   		   if(val.innerText.toUpperCase().indexOf(filter) > -1){
   			colContain[i].style.display='';
+  			count=count+1;
   		   }
   		   else{
   			colContain[i].style.display='none';
   		   }
   	   }
+  	 if(count==0){
+ 		document.getElementById("SearchFind").style.visibility = "visible"
+ 	   }
+ 	   else{
+ 		document.getElementById("SearchFind").style.visibility = "hidden"
+ 	   }
      }
      window.onload = function(){
    	  document.getElementById('clickButton').click();
@@ -114,7 +122,7 @@ h2{
                             <i class="fas fa-search h4 text-body"> </i>  
                         </div>  
                              <div class="col">  
-                            <input class="form-control form-control-lg form-control-borderless" id="myInput" type="search" onkeyup="SearchFuntion()" placeholder="Search topics or book name  here..."?>  
+                            <input class="form-control form-control-lg form-control-borderless" id="myInput" type="search" onkeyup="SearchFuntion()" onsearch="SearchFuntion()" placeholder="Search topics or book name  here..."?>  
                         </div>  
                                    <div class="col-auto">  
                             <button class="btn btn-lg btn-dark " onclick="return SearchFuntion()" type="button"> Search </button>  
@@ -195,6 +203,9 @@ h2{
 					</div>
 				</div>
 			</c:forEach>
+			<div id="SearchFind" style="visibility: hidden" class="text-center mb-3 pb-3">
+					<h3>No Records Found</h3>
+				</div>
 		</div>
 	</div>
 	</div>
