@@ -4,23 +4,23 @@ import java.util.Date;
 
 public class LibraryDTO {
 
-	String firstname;
-	String lastname;
-	String coursename;
-	int studentid;
-	String password;
-	String bookname;
-	String author;
-	String description;
-	int noOfBooks;
-	Date todayDate;
-	Date returnDate;
-	int price;
-	String status;
-	String renew;
-	String bookalert;
-	String request;
-	String buttonstatus;
+	private String firstname;
+	private String lastname;
+	private String coursename;
+	private int studentid;
+	private String password;
+	private String bookname;
+	private String author;
+	private String description;
+	private int noOfBooks;
+	private Date todayDate;
+	private Date returnDate;
+	private int price;
+	private String status;
+	private String renew;
+	private String bookalert;
+	private String request;
+	private String buttonstatus;
 	public String getBookname() {
 		return bookname;
 	}
@@ -125,3 +125,4 @@ public class LibraryDTO {
 	}
 	
 }
+
