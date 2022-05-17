@@ -92,7 +92,7 @@ public class LibraryDAO {
 	
 	
 	
-	public void  forgetPassword(int studentid, String password2) throws ClassNotFoundException, SQLException {
+	public int  forgetPassword(int studentid, String password2) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		this.StdId=studentid;
 		this.Password=password2;
@@ -101,8 +101,9 @@ public class LibraryDAO {
 		PreparedStatement ps = con.prepareStatement("update library_system  set password=? where UserId=?");
 		ps.setString(1, Password);
 		ps.setInt(2, StdId);
-		ps.executeUpdate();
+		int affectedRows =ps.executeUpdate();
 		con.close();
+		return affectedRows;
 	}
 
 
@@ -388,3 +389,7 @@ public class LibraryDAO {
 	
 	
 }
+
+
+
+
