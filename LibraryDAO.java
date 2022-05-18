@@ -12,10 +12,6 @@ import java.time.temporal.ChronoUnit;
 
 public class LibraryDAO {
 
-	private String driver;
-	private String url="jdbc:mysql://localhost:3306/library_system";
-	private String userName="root";
-	private String password="csir@123";
 	private Connection con;
 	private String FName;
 	private String LName;
@@ -26,8 +22,7 @@ public class LibraryDAO {
 	private String Bookname;
 	private String Author;
 	private String Description;
-	
-	
+	Connect c=new Connect();
 	
 	public String insertAllrows(String FName,String LName,String CName,String Password) throws SQLException, ClassNotFoundException {
 		this.FName=FName;
@@ -36,8 +31,7 @@ public class LibraryDAO {
 		//this.StdId=StdId;
 		this.Password=Password;
 		String Insert;
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		con = DriverManager.getConnection(url, userName, password);
+		Connection con=c.getConnection();
 		PreparedStatement ps = con.prepareStatement("insert into library_system(firstname,lastname,coursename,password)  values (?,?,?,?)");
 		ps.setString(1, FName);
 		ps.setString(2, LName);
@@ -60,8 +54,7 @@ public class LibraryDAO {
 		int Count1=0;
 		String Login = null;
 		String Fullname = null;
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		con = DriverManager.getConnection(url, userName, password);
+		Connection con=c.getConnection();
 		Statement stat = con.createStatement();
 	    ResultSet res = stat.executeQuery("select * from library_system");
 	    
@@ -96,8 +89,7 @@ public class LibraryDAO {
 		// TODO Auto-generated method stub
 		this.StdId=studentid;
 		this.Password=password2;
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		con = DriverManager.getConnection(url, userName, password);
+		Connection con=c.getConnection();
 		PreparedStatement ps = con.prepareStatement("update library_system  set password=? where UserId=?");
 		ps.setString(1, Password);
 		ps.setInt(2, StdId);
@@ -113,8 +105,7 @@ public class LibraryDAO {
 		this.Bookname=bookname;
 		this.Author=author;
 		this.Description=description;
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		con = DriverManager.getConnection(url, userName, password);
+		Connection con=c.getConnection();
 		PreparedStatement ps = con.prepareStatement("insert into books  values (?,?,?,?)");
 		ps.setString(1, Bookname);
 		ps.setString(2, Author);
@@ -128,8 +119,7 @@ public class LibraryDAO {
 
 	public ResultSet DisplayBooks() throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		con = DriverManager.getConnection(url, userName, password);
+		Connection con=c.getConnection();
 		Statement stmt = con.createStatement();
 		ResultSet result = stmt.executeQuery("SELECT * FROM books");
 		return result;
@@ -141,8 +131,7 @@ public class LibraryDAO {
 		// TODO Auto-generated method stub
 		this.Bookname=bookname2;
 		this.Author=author2;
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		con = DriverManager.getConnection(url, userName, password);
+		Connection con=c.getConnection();
 		PreparedStatement ps = con.prepareStatement("Delete from books  where bookname=? and author=?");
 		ps.setString(1, Bookname);
 		ps.setString(2, Author);
@@ -157,8 +146,7 @@ public class LibraryDAO {
 		// TODO Auto-generated method stub
 		java.sql.Date date = java.sql.Date.valueOf(todayDate);
 		java.sql.Date date1 = java.sql.Date.valueOf(returnDate);
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		con = DriverManager.getConnection(url, userName, password);
+		Connection con=c.getConnection();
 		PreparedStatement ps = con.prepareStatement("insert into issue_books(userId,bookname,author,issue_date,return_date,price,status)  values (?,?,?,?,?,?,?)");
 		ps.setInt(1, current_userid);
 		ps.setString(2, bookname2);
@@ -182,8 +170,7 @@ public class LibraryDAO {
 	public ResultSet DisplayIssueBooks(int current_userid) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		this.UserId=current_userid;
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		con = DriverManager.getConnection(url, userName, password);
+		Connection con=c.getConnection();
 		PreparedStatement ps = con.prepareStatement("SELECT bookname,author,issue_date,return_date,price,status FROM issue_books where userId=?");
 		ps.setInt(1, UserId);
 		ResultSet result = ps.executeQuery();
@@ -194,8 +181,7 @@ public class LibraryDAO {
 
 	public ResultSet DisplayStudentDetails() throws SQLException, ClassNotFoundException {
 		// TODO Auto-generated method stub
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		con = DriverManager.getConnection(url, userName, password);
+		Connection con=c.getConnection();
 		Statement stmt = con.createStatement();
 		ResultSet result = stmt.executeQuery("SELECT userId,bookname,author,price,status,action FROM issue_books");
 		return result;
@@ -206,7 +192,7 @@ public class LibraryDAO {
 	public ResultSet GetStudentId() throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		con = DriverManager.getConnection(url, userName, password);
+		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_system", "root", "csir@123");
 		Statement stmt = con.createStatement();
 		ResultSet result = stmt.executeQuery("SELECT max(userId) FROM library_system");
 		return result;
@@ -216,8 +202,7 @@ public class LibraryDAO {
 
 	public void CalculatePrice() throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		con = DriverManager.getConnection(url, userName, password);
+		Connection con=c.getConnection();
 		Statement stmt = con.createStatement();
 		ResultSet result = stmt.executeQuery("SELECT return_date,price,userId,bookname,author FROM issue_books");
 		while(result.next()) {
@@ -251,8 +236,7 @@ public class LibraryDAO {
 
 	public String BookStatus(String Bookname, String Author, int current_userid) throws SQLException, ClassNotFoundException {
 		// TODO Auto-generated method stub
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		con = DriverManager.getConnection(url, userName, password);
+		Connection con=c.getConnection();;
 		Statement stmt = con.createStatement();
 		PreparedStatement ps = con.prepareStatement("SELECT status FROM issue_books where bookname=? and author=? and userId=?");
 		ps.setString(1, Bookname);
@@ -271,8 +255,7 @@ public class LibraryDAO {
 	public void ReturnBook(int current_userid, String Bookname, String Author) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		String Returnbook= "Return Request";
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		con = DriverManager.getConnection(url, userName, password);
+		Connection con=c.getConnection();
 		PreparedStatement ps = con.prepareStatement("update issue_books  set action=? where userId=? and bookname=?  and author=?");
 		ps.setString(1, Returnbook);
 		ps.setInt(2, UserId);
@@ -288,8 +271,7 @@ public class LibraryDAO {
 		// TODO Auto-generated method stub
 		String Renewbook= "Renew Request";
 		String Feedback;
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		con = DriverManager.getConnection(url, userName, password);
+		Connection con=c.getConnection();
 		PreparedStatement ps2 = con.prepareStatement("SELECT price FROM issue_books where bookname=? and author=? and userId=?");
 		ps2.setString(1, Bookname);
 		ps2.setString(2, Author);
@@ -312,9 +294,8 @@ public class LibraryDAO {
 			java.sql.Date date = java.sql.Date.valueOf(todayDate);
 			java.sql.Date date1 = java.sql.Date.valueOf(returnDate);
 			String Status="Renewed";
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection(url, userName, password);
-			PreparedStatement ps = con.prepareStatement("update issue_books  set issue_date=?,return_date=?,status=?  where userId=? and bookname=?  and author=?");
+			Connection con2=c.getConnection();
+			PreparedStatement ps = con2.prepareStatement("update issue_books  set issue_date=?,return_date=?,status=?  where userId=? and bookname=?  and author=?");
 			ps.setDate(1, date);
 			ps.setDate(2, date1);
 			ps.setString(3, Status);
@@ -331,8 +312,7 @@ public class LibraryDAO {
 
 	public void ReturnRequest(int studentId, String Bookname, String Author, int availBook) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		con = DriverManager.getConnection(url, userName, password);
+		Connection con=c.getConnection();
 		PreparedStatement ps = con.prepareStatement("delete from issue_books where userId=? and bookname=?  and author=?");
 		ps.setInt(1, studentId);
 		ps.setString(2, Bookname);
@@ -356,8 +336,7 @@ public class LibraryDAO {
 		String Action="NoRequest";
 		String Status="Renewed";
 		int Price=0;
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		con = DriverManager.getConnection(url, userName, password);
+		Connection con=c.getConnection();
 		PreparedStatement ps = con.prepareStatement("update issue_books  set issue_date=?,return_date=?,action=?,status=?,price=? where userId=? and bookname=?  and author=?");
 		ps.setDate(1, date);
 		ps.setDate(2, date1);
@@ -375,8 +354,7 @@ public class LibraryDAO {
 	public int NoOfBooks(String Bookname, String Author) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		int count=0;
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		con = DriverManager.getConnection(url, userName, password);
+		Connection con=c.getConnection();
 		PreparedStatement ps = con.prepareStatement("SELECT noOfBooks FROM books where bookname=? and author=?");
 		ps.setString(1, Bookname);
 		ps.setString(2, Author);
@@ -389,6 +367,9 @@ public class LibraryDAO {
 	
 	
 }
+
+
+
 
 
 
